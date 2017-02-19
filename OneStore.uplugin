@@ -1,0 +1,25 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.1",
+	"FriendlyName": "OneStore",
+	"Description": "OneStore for andoroid",
+	"Category": "Network",
+	"CreatedBy": "NextStage",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"EngineVersion": "4.14.0",
+	"SupportURL": "",
+	"Modules": [
+		{
+			"Name": "OneStore",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"EnabledByDefault": false,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false
+}

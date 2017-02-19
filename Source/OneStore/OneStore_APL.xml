@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    OneStore Plugin
+    Created by NextStage(Junsu Park)
+    Copyright (c) 2016-2017 NextStage. All Rights Reserved.
+-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+    <init>
+        <log text="OneStore init"/>
+    </init>
+
+    <!-- Proguard	-->
+    <proguardAdditions>
+        <insert>
+          ########################################################################################## OneStore
+
+          -dontusemixedcaseclassnames
+          -dontskipnonpubliclibraryclasses
+          -dontpreverify
+          -verbose
+
+          -keep class com.skplanet.**{*;}
+
+          -keep class com.google.gson.**{*;}
+          -keep class com.tmoney.aidl.**{*;}
+
+          -keep public class android.net.http.SslError
+          -keep public class android.webkit.WebViewClient
+
+          -dontwarn android.app.Activity
+          -dontwarn android.webkit.CookieManager
+          -dontwarn android.webkit.WebSettings
+
+          -dontwarn android.webkit.WebView
+          -dontwarn android.net.http.SslError
+          -dontwarn android.webkit.WebViewClient
+
+          -keepattributes Signature
+          -keepattributes *Annotation*
+          -keepattributes JavascriptInterface
+
+          -dontshrink
+
+        </insert>
+    </proguardAdditions>
+
+    <!-- JarImports -->
+    <resourceCopies>
+        <copyDir src="$S(PluginDir)/../../ThirdPartyLibraries"
+            dst="$S(BuildDir)" />
+    </resourceCopies>
+
+
+    <!-- GameActivityImport -->
+    <gameActivityImportAdditions>
+        <insert>
+          import com.onestore.OnestoreIapHelper;
+        </insert>
+    </gameActivityImportAdditions>
+
+    <!-- ManifestUpdates -->
+    <androidManifestUpdates>
+       <addElements tag="application">
+         <meta-data android:name="iap:api_version" android:value="4" />
+       </addElements>
+
+      <setBoolFromProperty result="bDebugMode" ini="Engine" section="/Script/OneStore.OneStoreSettings" property="bDebugMode" default="false"/>
+      <setElement result="bDebugModeMetadata" value="meta-data"/>
+      <addAttribute tag="$bDebugModeMetadata" name="android:name" value="bOneStoreDebugMode"/>
+      <addAttribute tag="$bDebugModeMetadata" name="android:value" value="$B(bDebugMode)"/>
+      <addElement tag="application" name="bDebugModeMetadata"/>
+      
+      
+      <setStringFromProperty result="ApplicationID" ini="Engine" section="/Script/OneStore.OneStoreSettings" property="ApplicationID" default="Default"/>
+      <setElement result="ApplicationIDMetadata" value="meta-data"/>
+      <addAttribute tag="$ApplicationIDMetadata" name="android:name" value="OneStoreApplicationID"/>
+      <addAttribute tag="$ApplicationIDMetadata" name="android:value" value="$S(ApplicationID)"/>
+      <addElement tag="application" name="ApplicationIDMetadata"/>
+
+<addPermission android:name="android.permission.RECEIVE_SMS"/>
+      
+    </androidManifestUpdates>
+
+    <!-- GameActivity class -->
+    <gameActivityClassAdditions>
+        <insert>
+          private OnestoreIapHelper mOnestoreIapHelper;
+
+          public void AndroidThunkJava_OneStoreIapRequestCommand()
+          {
+          Log.debug("[JAVA] - AndroidThunkJava_OneStoreIapRequestCommand");
+          mOnestoreIapHelper.doCmdProductInfo();
+          }
+
+          public void AndroidThunkJava_OneStoreIapRequestPurchase(String ProductID, String ProductTitle, String TID, String BPInfo)
+          {
+          Log.debug("[JAVA] - AndroidThunkJava_OneStoreIapRequestPurchase");
+          mOnestoreIapHelper.requestPurchase(ProductID, ProductTitle, TID, BPInfo);
+          }
+        </insert>
+    </gameActivityClassAdditions>
+
+  <!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+    <gameActivityReadMetadataAdditions>
+      <insert>
+        String OneStoreApplicationID = bundle.getString("OneStoreApplicationID");
+        boolean bOneStoreDebugMode = bundle.getBoolean("bOneStoreDebugMode");
+
+        if (nativeIsShippingBuild())
+        {
+        bOneStoreDebugMode = false;
+        }
+
+        mOnestoreIapHelper = new OnestoreIapHelper(this, bOneStoreDebugMode, OneStoreApplicationID);
+        Log.debug("[JAVA] - OnestoreIapHelper start");
+      </insert>
+    </gameActivityReadMetadataAdditions>
+
+    <!-- GameActivity onCreate -->
+    <gameActivityOnCreateAdditions>
+        <insert>
+          
+        </insert>
+    </gameActivityOnCreateAdditions>
+
+    <!-- GameActivity onDestroy -->
+    <gameActivityOnDestroyAdditions>
+      <insert>
+
+      </insert>
+    </gameActivityOnDestroyAdditions>
+
+
+    <!-- GameActivity onStart -->
+    <gameActivityOnStartAdditions>
+      <insert>
+
+      </insert>
+    </gameActivityOnStartAdditions>
+
+    <!-- GameActivity onStop -->
+    <gameActivityOnStopAdditions>
+      <insert>
+
+      </insert>
+    </gameActivityOnStopAdditions>
+
+
+    <!-- GameActivity onPause	-->
+    <gameActivityOnPauseAdditions>
+      <insert>
+
+      </insert>
+    </gameActivityOnPauseAdditions>
+
+
+    <!-- GameActivity onResume -->
+    <gameActivityOnResumeAdditions>
+      <insert>
+
+      </insert>
+    </gameActivityOnResumeAdditions>
+
+</root>
