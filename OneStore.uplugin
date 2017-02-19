@@ -1,15 +1,15 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.1",
+	"VersionName": "1.2",
 	"FriendlyName": "OneStore",
-	"Description": "OneStore for andoroid",
+	"Description": "OneStore for android",
 	"Category": "Network",
 	"CreatedBy": "NextStage",
 	"CreatedByURL": "",
 	"DocsURL": "",
 	"MarketplaceURL": "",
-	"EngineVersion": "4.14.0",
+	"EngineVersion": "4.14.3",
 	"SupportURL": "",
 	"Modules": [
 		{

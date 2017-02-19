@@ -71,7 +71,7 @@ void AndroidThunkJava_OneStoreIapRequestPurchase(FString ProductID, FString Prod
 		jstring JavaTID = Env->NewStringUTF(TCHAR_TO_UTF8(*TID));
 		jstring JavaBPInfo = Env->NewStringUTF(TCHAR_TO_UTF8(*BPInfo));
 		static jmethodID Method = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "AndroidThunkJava_OneStoreIapRequestPurchase", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", false);
-		FJavaWrapper::CallBooleanMethod(Env, FJavaWrapper::GameActivityThis, Method, JavaProductIdentifier, JavaProductTitle, JavaTID, JavaBPInfo);
+		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, Method, JavaProductIdentifier, JavaProductTitle, JavaTID, JavaBPInfo);
 		Env->DeleteLocalRef(JavaProductIdentifier);
 		Env->DeleteLocalRef(JavaProductTitle);
 		Env->DeleteLocalRef(JavaTID);

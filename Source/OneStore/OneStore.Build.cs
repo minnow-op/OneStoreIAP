@@ -33,8 +33,7 @@ namespace UnrealBuildTool.Rules
                     "CoreUObject",
                     "Engine",
                     "OnlineSubsystem",
-                    "OnlineSubsystemUtils",
-				    
+                    "OnlineSubsystemUtils"
 			    }
                 );
 
@@ -55,7 +54,6 @@ namespace UnrealBuildTool.Rules
             PublicIncludePathModuleNames.AddRange(
                 new string[]
                 {
-                    // PublicIncludePathModule
                     "Launch"
                 }
                 );
